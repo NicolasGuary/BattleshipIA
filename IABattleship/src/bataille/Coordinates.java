@@ -1,5 +1,8 @@
 package bataille;
 
+import java.util.ArrayList;
+
+
 public class Coordinates {
 	private int hor;
 	private char vert;
@@ -92,7 +95,28 @@ public class Coordinates {
 		}
 		res = res.substring(0, res.length()-3);
 		return res;
-		
+	}
+	
+	public ArrayList<Coordinates> computeCoord(Integer shipSize) {
+		ArrayList<Coordinates> res= new ArrayList<Coordinates>();
+		int y = this.getHor()-(shipSize-1);
+		String a = incrementChar(this.getVert(), (shipSize-1)) + ""+this.getHor();
+		String b = decrementChar(this.getVert(), (shipSize-1)) + ""+this.getHor();
+		String c = this.getVert()+""+(this.getHor()+(shipSize-1));
+		String d = this.getVert()+""+y;
+		if(isValid(a)) {
+			res.add(new Coordinates(a));
+		}
+		if(isValid(b)) {
+			res.add(new Coordinates(b));
+		}
+		if(isValid(c)) {
+			res.add(new Coordinates(c));
+		}
+		if(isValid(d)) {
+			res.add(new Coordinates(d));
+		};
+		return res;
 	}
 	// Redéfinition de hasCode et de equals pour la comparaison automatique de containsKey
 	public boolean equals(Object o) {

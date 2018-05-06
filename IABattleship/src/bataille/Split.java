@@ -3,6 +3,8 @@ package bataille;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+
 import exception.*;
 
 public class Split {
@@ -29,9 +31,15 @@ public class Split {
 		System.out.println(game.whosTurn());
 		*/
 		
+		
 		Fleet fleet = new Fleet();
-		Player player = new Player("j1", fleet);
-		System.out.println(player.OpponentBoardString());
+		AIPlayer player = new AIPlayer("j1", fleet);
+		Coordinates sCoordinates = new Coordinates();
+		sCoordinates = player.placeShipStart();
+		Coordinates eCoordinates = new Coordinates();
+		FleetType fleetType;
+		Ship s=player.createIAShip(fleetType.CRUISER);
+		
 		
 		try{
 		Ship s3 = new Ship("CRUISER","C6","A6");

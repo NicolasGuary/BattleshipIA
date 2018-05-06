@@ -1,5 +1,6 @@
 package bataille;
 import java.util.Scanner;
+import java.util.jar.Pack200;
 
 import exception.OverlapException;
 
@@ -9,8 +10,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Player p1 = initPlayer("Player 1");
-		Player p2 = initAI("Player 2");
+		HumanPlayer p1 = initPlayer("Player 1");
+		AIPlayer p2 = initAI("Player 2");
 		
 		Game game = new Game (p1, p2);
 		
@@ -18,15 +19,21 @@ public class Main {
 			System.out.println("C'est au tour de " + game.whosTurn().getName());
 			afficherEtatJoueur(game.whosTurn());
 			
-			if(game.whosTurn() instanceof HumanPlayer) {
+			if(game.whosTurn() == p1) {
 				Coordinates coordShot = new Coordinates(askCoordinates("Où souhaitez vous tirer ?"));
 				int resShot = game.getOpponent().shot(coordShot);
 				game.whosTurn().setResShot(coordShot, resShot);
 				promptShot(resShot);	
 				game.nextTurn();
 			}
-			else {
-				Coordinates coordShot = new Coordinates(game.whosTurn().aiCoordinates());
+			else if(game.whosTurn() == p2){
+				Coordinates coordShot = new Coordinates();
+				coordShot = AICoordinates(p2);
+				System.out.println("L'adversaire tire en: " + coordShot.toString());
+				int resShot = game.getOpponent().shot(coordShot);
+				game.whosTurn().setResShot(coordShot, resShot);
+				promptShot(resShot);	
+				game.nextTurn();
 			}
 
 		}
@@ -67,7 +74,26 @@ public class Main {
 		}
 		return fleet;
 	}
-
+	
+	private static Fleet initIAFleet(AIPlayer p) {
+		Fleet fleet = new Fleet();
+		
+		// Création de tout les bateaux
+		for(FleetType fleetType: FleetType.values() ) {
+			for (int i = 0; i < fleetType.getAmount(); i++) {
+				boolean insert = false;
+				while (!insert) {
+					try {
+						fleet.addShip(p.createIAShip(fleetType));
+						insert = true;
+					} catch (OverlapException e) {
+						System.out.println(e);
+					}
+				}	
+			}
+		}
+		return fleet;
+	}
 	
 	// Permet de créer un bateau
 	private static Ship createShip(FleetType fleetType) {
@@ -95,9 +121,10 @@ public class Main {
 			}
 		}
 		
-		return ship;
-		
+		return ship;	
 	}
+	
+	
 	
 	// Demande des coodonnées à l'utilisateur en posant une question
 	private static String askCoordinates(String message) {
@@ -113,8 +140,8 @@ public class Main {
 		return coord;
 	}
 	
-	private Coordinates AICoordinates(AIPlayer ai) {
-		return ai.placeShip();
+	private static Coordinates AICoordinates(AIPlayer ai) {
+		return ai.attack();
 	}
 	
 	// Permet d'afficher le résultat d'un tir
@@ -140,9 +167,4 @@ public class Main {
 				p.OpponentBoardString() + "\n");
 				//+ p.fleetString()
 	}
-	
-	
-	
-	
-
 }

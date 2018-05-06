@@ -35,22 +35,22 @@ public abstract class Player {
 	
 	public  String OpponentBoardString () {
 		String res = "  ";
-		for(int j=1;j<Player.BOARD_SIZE+2;j++){
+		for(int j=0;j<Player.BOARD_SIZE+1;j++){
 			for(char i='A';i<'A'+Player.BOARD_SIZE;i++){
 				// Première ligne on crée les lettres
-				if (j == 1) {
+				if (j == 0) {
 					res += "  "+ i;
 				} else {
 					Coordinates c = new Coordinates(i,j);	
 					res+= valueCell(c);	
 				}
 			}
-			if (j != Player.BOARD_SIZE+1) {
-				if(j<10) {
-					res +="\n" + j +"  " ;
+			if (j != Player.BOARD_SIZE) {
+				if(j<9) {
+					res +="\n" + (j+1) +"  " ;
 				}
 				else {
-					res +="\n" + j +" " ;
+					res +="\n" + (j+1) +" " ;
 				}
 				
 			} else {
@@ -65,7 +65,7 @@ public abstract class Player {
 		
 			if(opponentBoard.containsKey(c)) {
 				if(opponentBoard.get(c)==0) {
-					res+=" - ";
+					res+=" 0 ";
 				}
 				if(opponentBoard.get(c)==1) {
 					res+=" x ";
