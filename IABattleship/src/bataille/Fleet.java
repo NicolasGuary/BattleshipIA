@@ -78,5 +78,13 @@ public class Fleet {
 		
 		return 0;
 	}
-	
+	@Override
+	public String toString() {
+		String res="[ ";
+		for(Ship ship : this.shipList) {
+			res += ship.toString();
+		}
+		res += " ]";
+		return res;
+	}
 }

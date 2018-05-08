@@ -2,12 +2,11 @@ package bataille;
 
 import java.util.HashMap;
 
-public abstract class Player {
+public abstract class Player implements Playable {
 	public static final int BOARD_SIZE = 10;
 	/* Garde en memoire les tirs sur l'adversaire
 	code : A l'eau : 0 ; Touche : 1 ; Touché-Coulé : 2 */   
 	private HashMap<Coordinates, Integer> opponentBoard;
-	
 	private Fleet fleet;
 	private String name;
 	
@@ -19,6 +18,8 @@ public abstract class Player {
 		opponentBoard = new HashMap<Coordinates, Integer>();
 	}
 	
+	public Player() {
+	}
 	
 	public Fleet getFleet(){
 		return this.fleet;
@@ -125,10 +126,5 @@ public abstract class Player {
 		}
 	
 		
-	};
-	
-	
-	
-
-	
+	}
 }

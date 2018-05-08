@@ -5,12 +5,11 @@ import java.util.Map;
 
 public class Ship {
 	private String shipType;
-	//String is a case from the board and the Boolean indicates if the corresponding case has been hit or not
+	
+	//Coordinates is a case from the board and the Boolean indicates if the corresponding case has been hit or not
 	//true if hit, false if not
-
 	Map<Coordinates,Boolean> shipCase;
-	
-	
+		
 	//CONSTRUCTOR FOR A GENERIC SHIP
 	// Both coordinates are valid due to previous verification on the Main
 	public Ship(String shipType, String startCoordinates, String endCoordinates) throws BadSizeException, OrientationException {

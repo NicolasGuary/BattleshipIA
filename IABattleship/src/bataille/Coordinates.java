@@ -47,7 +47,7 @@ public class Coordinates {
 		return res;
 	}
 	public static boolean isValid(String coord)  {
-		if (coord == null || coord.isEmpty() || coord.equalsIgnoreCase(null)) {
+		if (coord == null || coord.isEmpty() || coord.equalsIgnoreCase(null) || coord.length()<2) {
 			  return false;
 			}
 		// Vérification de la lettre
@@ -59,7 +59,7 @@ public class Coordinates {
 		}
 		char ligne = Character.toUpperCase(coord.charAt(0));
 		
-		if ((int)ligne > ((int)'A' + Player.BOARD_SIZE) || (int)ligne < ((int)'A')) {
+		if ((int)ligne > ((int)'A' + Player.BOARD_SIZE-1) || (int)ligne < ((int)'A')) {
 			return false;
 		}
 		// Vérification de la colonne
@@ -97,24 +97,36 @@ public class Coordinates {
 		return res;
 	}
 	
-	public ArrayList<Coordinates> computeCoord(Integer shipSize) {
+	public boolean coordOverlap(Player p) {
+		for(Ship shipFleet : p.getFleet().getShipList()){
+		for(Coordinates c : shipFleet.getShipCase().keySet()){
+			if (this.equals(c)){
+				return true;
+			}
+		}
+		}
+		return false;
+	}
+	
+	public ArrayList<Coordinates> computeCoord(Integer shipSize, Playable player) {
 		ArrayList<Coordinates> res= new ArrayList<Coordinates>();
-		int y = this.getHor()-(shipSize-1);
-		String a = incrementChar(this.getVert(), (shipSize-1)) + ""+this.getHor();
-		String b = decrementChar(this.getVert(), (shipSize-1)) + ""+this.getHor();
-		String c = this.getVert()+""+(this.getHor()+(shipSize-1));
-		String d = this.getVert()+""+y;
-		if(isValid(a)) {
-			res.add(new Coordinates(a));
+		
+		Coordinates a = this.right(shipSize);
+		Coordinates b = this.left(shipSize);
+		Coordinates c = this.down(shipSize);
+		Coordinates d = this.up(shipSize);
+		
+		if(isValid(a.toString())) {
+			res.add(a);
 		}
-		if(isValid(b)) {
-			res.add(new Coordinates(b));
+		if(isValid(b.toString())) {
+			res.add(b);
 		}
-		if(isValid(c)) {
-			res.add(new Coordinates(c));
+		if(isValid(c.toString())) {
+			res.add(c);
 		}
-		if(isValid(d)) {
-			res.add(new Coordinates(d));
+		if(isValid(d.toString())) {
+			res.add(d);
 		};
 		return res;
 	}
@@ -139,17 +151,19 @@ public class Coordinates {
 		return vert + "" + hor;
 	}
 	
-	public Coordinates left() {
-		return new Coordinates(String.valueOf(this.hor - 1) + String.valueOf(this.vert));
+	public Coordinates left(Integer size) {
+		return new Coordinates(decrementChar(this.getVert(), (size-1)) + ""+this.getHor());
 	}
-	public Coordinates right() {
-		return new Coordinates(String.valueOf(this.hor + 1) + String.valueOf(this.vert));
+	
+	public Coordinates right(Integer size) {
+		return new Coordinates(incrementChar(this.getVert(), (size-1)) + ""+this.getHor());
 	}
-	public Coordinates up() {
-		return new Coordinates(String.valueOf(this.hor) + String.valueOf(this.vert - 1));
+	public Coordinates up(Integer size) {
+		int y = this.getHor()-(size-1);
+		return new Coordinates(this.getVert()+""+y);
 	}
-	public Coordinates down() {
-		return new Coordinates(String.valueOf(this.hor) + String.valueOf(this.vert + 1));
+	public Coordinates down(Integer size) {
+		return new Coordinates(this.getVert()+""+(this.getHor()+(size-1)));
 	}
 	
 	

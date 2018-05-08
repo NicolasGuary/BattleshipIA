@@ -10,6 +10,14 @@ import exception.*;
 public class Split {
 
 	public static void main(String[] args) {
+		for(int i=0;i<15;i++) {
+			AIPlayer aiPlayer = new AIPlayer();
+			Coordinates coordinates = aiPlayer.placeShipStart();
+			System.out.println(coordinates.toString());
+		}
+		
+
+		System.out.println("Et mercce \n");
 		// TODO Auto-generated method stub
 		/*String a = "A2";
 		System.out.println(a.charAt(0));
@@ -31,31 +39,42 @@ public class Split {
 		System.out.println(game.whosTurn());
 		*/
 		
-		
 		Fleet fleet = new Fleet();
 		AIPlayer player = new AIPlayer("j1", fleet);
-		Coordinates sCoordinates = new Coordinates();
-		sCoordinates = player.placeShipStart();
-		Coordinates eCoordinates = new Coordinates();
-		FleetType fleetType;
-		Ship s=player.createIAShip(fleetType.CRUISER);
-		
-		
-		try{
+		Coordinates coordStart;
+		Coordinates coordEnd;
+		Ship ships = null;
+		while(ships == null) {	
+			
+		try{		
+			
+		Ship ship = new Ship("BATTLESHIP", "A4","A1");
+		System.out.println(ship.toString());
 		Ship s3 = new Ship("CRUISER","C6","A6");
 		System.out.println(s3.toString());
-		Ship s4 = new Ship("CRUISER","A3","A5");
-		System.out.println(s4.toString());
-		Coordinates a  = new Coordinates("H2");
-		Coordinates b  = new Coordinates("F2");
-		System.out.println(s3.checkSize(a, b));
+		coordStart = player.placeShipStart();
+		coordEnd = player.placeShipEnd(coordStart, FleetType.CARRIER);
+		ships = new Ship("CARRIER", coordStart.toString(), coordEnd.toString());
+		System.out.println("IA SHIP: "+ships.toString());
+		ArrayList<Coordinates> ar = ships.getFirstCoordinate().computeCoord(5,player);
+		System.out.println("Les coordonées possibles sont: " +ar.toString());
+		player.getFleet().addShip(ship);
+		player.getFleet().addShip(s3);
+		player.getFleet().addShip(ships);
+
+		System.out.println(player.getFleet().toString());
+		//System.out.println(test.coordOverlap(player) +" TEST HERE");
 		}
-		catch( BadSizeException | OrientationException e){
+		catch(Exception e){
+			e.printStackTrace();
+			coordStart = player.placeShipStart();
+			coordEnd = player.placeShipEnd(coordStart,FleetType.CARRIER);
 			System.out.println(e);
 			System.out.println("Please input a new Ship");
+
 		}
 
-
+		}
 		/*
 		System.out.println(s1.getFirstCoordinate());
 		System.out.println(s1.getLastCoordinate());

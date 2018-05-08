@@ -2,10 +2,10 @@ package bataille;
 
 public class Game {
 	private int turn;
-	private Player j1;
-	private Player j2;
+	private Playable j1;
+	private Playable j2;
 
-	public Game(Player j1, Player j2) {
+	public Game(Playable j1, Playable j2) {
 		this.turn = 0;
 		this.j1 = j1;
 		this.j2=j2;
@@ -20,7 +20,7 @@ public class Game {
 		return turn % 2;
 	}
 	
-	public Player whosTurn() {
+	public Playable whosTurn() {
 		if(playerTurn()==0) {
 			return j1;
 		}
@@ -29,7 +29,7 @@ public class Game {
 		}
 	}
 
-public Player getOpponent() {
+public Playable getOpponent() {
 	if(playerTurn()==0) {
 		return j2;
 	}
@@ -47,7 +47,7 @@ public boolean gameIsOver(){
 			|| whosTurn().getFleet().shipsRemaining() == 0;
 }
 
-public Player getWinner() {
+public Playable getWinner() {
 	if (getOpponent().getFleet().shipsRemaining() == 0) {
 		return whosTurn();
 	} else if(whosTurn().getFleet().shipsRemaining() == 0) {
