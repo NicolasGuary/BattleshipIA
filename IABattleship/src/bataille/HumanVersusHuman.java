@@ -1,7 +1,7 @@
 package bataille;
 import java.util.Scanner;
 
-public class AiVersusHuman {
+public class HumanVersusHuman {
 	private static int scoreP1 = 0;
 	private static int scoreP2 = 0;
 	static Scanner sc = new Scanner(System.in);;
@@ -13,30 +13,20 @@ public class AiVersusHuman {
 	public static void play() {
 		Human p1 = new Human();
 		p1 = initHumanPlayer("Player 1",p1);
-		AIPlayer p2 = new AIPlayer();
-		p2 = initAIPlayer("Player 2", p2);
+		Human p2 = new Human();
+		p2 = initHumanPlayer("Player 2", p2);
 		Game game = new Game(p1, p2);
 		
 		while (!game.gameIsOver()){ 
-			System.out.println("C'est au tour de " + game.whosTurn().getName());
 			
-			if(game.whosTurn() == p1) {
-				afficherEtatJoueur(p1);
-				Coordinates coordShot = p1.attack();
-				int resShot = p2.shot(coordShot);
-				p1.setResShot(coordShot, resShot);
-				promptShot(resShot);	
-				game.nextTurn();
-			}
-			else if(game.whosTurn() == p2){
-				Coordinates coordShot = new Coordinates();
-				coordShot = p2.attack();
-				System.out.println("L'adversaire tire en: " + coordShot.toString());
-				int resShot = p1.shot(coordShot);
-				p2.setResShot(coordShot, resShot);
-				promptShot(resShot);	
-				game.nextTurn();
-			}
+			System.out.println("C'est au tour de " + game.whosTurn().getName());
+			afficherEtatJoueur(game.whosTurn());
+			Coordinates coordShot = game.whosTurn().attack();
+			int resShot = game.getOpponent().shot(coordShot);
+			System.out.println("L'adversaire tire en: " + coordShot.toString());
+			game.whosTurn().setResShot(coordShot, resShot);
+			promptShot(resShot);	
+			game.nextTurn();
 		}
 	
 		if(game.getWinner()==p1) {
@@ -55,13 +45,6 @@ public class AiVersusHuman {
 		Fleet fleet = p.initFleet();
 		return new Human(name, fleet);
 	}
-
-	private static AIPlayer initAIPlayer(String name, AIPlayer p) {
-		System.out.println("Initialisation du joueur " + name);
-		Fleet fleet = p.initFleet();
-		return new AIPlayer(name, fleet);
-	}
-	
 	
 	// Permet d'afficher le résultat d'un tir
 	private static void promptShot (int codePrompt) {
@@ -81,7 +64,7 @@ public class AiVersusHuman {
 		}	
 	}
 	
-	public static void afficherEtatJoueur(Human p) {
+	public static void afficherEtatJoueur(Playable p) {
 		System.out.println("Voici le plateau ennemi : \n" + 
 				p.OpponentBoardString() + "\n");
 	}

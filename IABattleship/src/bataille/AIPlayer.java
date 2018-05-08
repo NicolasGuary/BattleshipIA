@@ -115,4 +115,50 @@ public class AIPlayer implements Playable {
 			this.opponentBoard.put(coordShot, resShot);
 		}
 	}
+	
+	//Methods used to display the board
+	public  String OpponentBoardString () {
+		String res = "  ";
+		for(int j=0;j<Human.BOARD_SIZE+1;j++){
+			for(char i='A';i<'A'+Human.BOARD_SIZE;i++){
+				if (j == 0) {
+					res += "  "+ i;
+				} else {
+					Coordinates c = new Coordinates(i,j);	
+					res+= valueCell(c);	
+				}
+			}
+			if (j != Human.BOARD_SIZE) {
+				if(j<9) {
+					res +="\n" + (j+1) +"  " ;
+				}
+				else {
+					res +="\n" + (j+1) +" " ;
+				}
+				
+			} else {
+				res +="\n" ;
+			}
+		}
+		return res;
+	}
+	
+	public  String valueCell(Coordinates c) {
+		String res="";
+			if(opponentBoard.containsKey(c)) {
+				if(opponentBoard.get(c)==0) {
+					res+=" 0 ";
+				}
+				if(opponentBoard.get(c)==1) {
+					res+=" x ";
+				}
+				if(opponentBoard.get(c)==2) {
+					res+=" * ";
+				}
+			}
+			else{
+				res+=" ~ ";
+		}			
+		return res;	
+	}
 }

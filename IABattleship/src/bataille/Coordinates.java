@@ -59,13 +59,13 @@ public class Coordinates {
 		}
 		char ligne = Character.toUpperCase(coord.charAt(0));
 		
-		if ((int)ligne > ((int)'A' + Player.BOARD_SIZE-1) || (int)ligne < ((int)'A')) {
+		if ((int)ligne > ((int)'A' + Human.BOARD_SIZE-1) || (int)ligne < ((int)'A')) {
 			return false;
 		}
 		// Vérification de la colonne
 		try {
 			int checkColonne = Integer.valueOf(coord.substring(1));
-			if (checkColonne < 1 || checkColonne > Player.BOARD_SIZE) {
+			if (checkColonne < 1 || checkColonne > Human.BOARD_SIZE) {
 				return false;
 			}
 		} catch (Exception e) {
@@ -76,11 +76,10 @@ public class Coordinates {
 	
 	public String computeCoordinates(Integer shipSize) {
 		String res="";
-		int y = this.getHor()-(shipSize-1);
-		String a = incrementChar(this.getVert(), (shipSize-1)) + ""+this.getHor();
-		String b = decrementChar(this.getVert(), (shipSize-1)) + ""+this.getHor();
-		String c = this.getVert()+""+(this.getHor()+(shipSize-1));
-		String d = this.getVert()+""+y;
+		String a = this.right(shipSize).toString();
+		String b = this.left(shipSize).toString();
+		String c = this.down(shipSize).toString();
+		String d = this.up(shipSize).toString();
 		if(isValid(a)) {
 			res +=a+" or ";
 		}
@@ -97,7 +96,7 @@ public class Coordinates {
 		return res;
 	}
 	
-	public boolean coordOverlap(Player p) {
+	public boolean coordOverlap(Playable p) {
 		for(Ship shipFleet : p.getFleet().getShipList()){
 		for(Coordinates c : shipFleet.getShipCase().keySet()){
 			if (this.equals(c)){

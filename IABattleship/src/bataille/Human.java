@@ -111,7 +111,6 @@ public class Human implements Playable {
 		String res = "  ";
 		for(int j=0;j<Human.BOARD_SIZE+1;j++){
 			for(char i='A';i<'A'+Human.BOARD_SIZE;i++){
-				// Première ligne on crée les lettres
 				if (j == 0) {
 					res += "  "+ i;
 				} else {
@@ -136,7 +135,6 @@ public class Human implements Playable {
 	
 	public  String valueCell(Coordinates c) {
 		String res="";
-		
 			if(opponentBoard.containsKey(c)) {
 				if(opponentBoard.get(c)==0) {
 					res+=" 0 ";
@@ -150,8 +148,7 @@ public class Human implements Playable {
 			}
 			else{
 				res+=" ~ ";
-		}
-			
+		}			
 		return res;	
 	}
 	

@@ -16,4 +16,8 @@ public interface Playable {
 	//Getters
 	public String getName();
 	public Fleet getFleet();
+	
+	//Display method
+	//Not used for AI in order to speed the game process
+	public String OpponentBoardString();
 }

@@ -10,11 +10,13 @@ import exception.*;
 public class Split {
 
 	public static void main(String[] args) {
-		for(int i=0;i<15;i++) {
+		
 			AIPlayer aiPlayer = new AIPlayer();
-			Coordinates coordinates = aiPlayer.placeShipStart();
-			System.out.println(coordinates.toString());
-		}
+			Fleet fleet = aiPlayer.initFleet();
+			Human human=new Human("J2",fleet);
+			System.out.println(human.OpponentBoardString());
+			System.out.println(fleet.toString());
+
 		
 
 		System.out.println("Et mercce \n");
@@ -39,8 +41,10 @@ public class Split {
 		System.out.println(game.whosTurn());
 		*/
 		
-		Fleet fleet = new Fleet();
+
 		AIPlayer player = new AIPlayer("j1", fleet);
+
+		
 		Coordinates coordStart;
 		Coordinates coordEnd;
 		Ship ships = null;

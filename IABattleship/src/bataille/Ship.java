@@ -159,14 +159,11 @@ public class Ship {
 		if (this.isHit(missileCoord)){
 			if (this.isAlreadyHit(missileCoord)) {
 				return 3;
-			}
-			
-			this.shipCase.put(missileCoord, true);
-			
+			}			
+			this.shipCase.put(missileCoord, true);			
 			if (this.isSunk()) {
 				return 2;
-			}
-			
+			}		
 			return 1;
 		} else {
 			return 0;
