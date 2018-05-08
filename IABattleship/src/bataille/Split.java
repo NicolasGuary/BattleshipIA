@@ -10,9 +10,18 @@ import exception.*;
 public class Split {
 
 	public static void main(String[] args) {
-		
-			AIPlayer aiPlayer = new AIPlayer();
-			Fleet fleet = aiPlayer.initFleet();
+			Fleet fleet = new Fleet();
+			MediumAI aiPlayer = new MediumAI("Test", fleet);
+			System.out.println("On va tester ça mon pote");
+			for(int i=0; i<50;i++) {
+				Coordinates coordShot = aiPlayer.attack();
+				System.out.println(coordShot.toString());
+				aiPlayer.setResShot(coordShot, 1);
+			}
+			
+			
+			
+			//Fleet fleet = aiPlayer.initFleet();
 			Human human=new Human("J2",fleet);
 			System.out.println(human.OpponentBoardString());
 			System.out.println(fleet.toString());
