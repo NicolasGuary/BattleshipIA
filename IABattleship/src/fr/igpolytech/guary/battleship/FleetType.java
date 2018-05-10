@@ -1,4 +1,4 @@
-package bataille;
+package fr.igpolytech.guary.battleship;
 
 public enum FleetType {
     CARRIER(5,1),

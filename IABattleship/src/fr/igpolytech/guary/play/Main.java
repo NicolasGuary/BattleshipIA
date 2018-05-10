@@ -1,4 +1,4 @@
-package bataille;
+package fr.igpolytech.guary.play;
 import java.util.Scanner;
 
 public class Main {

@@ -1,5 +1,8 @@
-package bataille;
+package fr.igpolytech.guary.battleship;
 import exception.*;
+import fr.igpolytech.guary.exceptions.BadSizeException;
+import fr.igpolytech.guary.exceptions.OrientationException;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 

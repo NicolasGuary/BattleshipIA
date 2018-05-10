@@ -1,28 +1,27 @@
-package bataille;
+package fr.igpolytech.guary.battleship;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import exception.OverlapException;
+import fr.igpolytech.guary.exceptions.OverlapException;
 
-public class AIPlayer implements Playable {
+public class EasyAI implements Playable {
 	public static final int BOARD_SIZE = 10;
 	/* Garde en memoire les tirs sur l'adversaire
 	code : A l'eau : 0 ; Touche : 1 ; Touché-Coulé : 2 */   
 	private HashMap<Coordinates, Integer> opponentBoard;
 	private Fleet fleet;
-	private String name;
-	public AIPlayer(String name, Fleet fleet) {
-		this.name = name;
+	
+	public EasyAI(Fleet fleet) {
 		this.fleet=fleet;
 		opponentBoard = new HashMap<Coordinates, Integer>();
 	}
-	public AIPlayer() {
+	public EasyAI() {
 		super();
 	}
  
 	public String getName() {
-		return this.name;
+		return "EasyAI";
 	}
 	public Fleet getFleet() {
 		return this.fleet;
@@ -32,10 +31,10 @@ public class AIPlayer implements Playable {
 	public Coordinates placeShipStart() {
 		//Generating random int 
 		Random rand = new Random();
-		int  n = rand.nextInt(10) + 1;
+		int  n = rand.nextInt(BOARD_SIZE) + 1;
 		//Generating random char
 	    Random r = new Random();
-	    int j = r.nextInt(10);
+	    int j = r.nextInt(BOARD_SIZE);
 		char k=(char)('A'+j);
 		Coordinates coordinates = new Coordinates(k,n);
 		return coordinates;
@@ -96,10 +95,10 @@ public class AIPlayer implements Playable {
 	public Coordinates attack() {
 		//Generating random int 
 		Random rand = new Random();
-		int  n = rand.nextInt(10) + 1;
+		int  n = rand.nextInt(BOARD_SIZE) + 1;
 		//Generating random char
 	    Random r = new Random();
-	    int j = r.nextInt(10);
+	    int j = r.nextInt(BOARD_SIZE);
 		char k=(char)('A'+j);
 		Coordinates coordinates = new Coordinates(k,n);
 		return coordinates;
@@ -114,51 +113,5 @@ public class AIPlayer implements Playable {
 		if (resShot <= 2 ) {
 			this.opponentBoard.put(coordShot, resShot);
 		}
-	}
-	
-	//Methods used to display the board
-	public  String OpponentBoardString () {
-		String res = "  ";
-		for(int j=0;j<Human.BOARD_SIZE+1;j++){
-			for(char i='A';i<'A'+Human.BOARD_SIZE;i++){
-				if (j == 0) {
-					res += "  "+ i;
-				} else {
-					Coordinates c = new Coordinates(i,j);	
-					res+= valueCell(c);	
-				}
-			}
-			if (j != Human.BOARD_SIZE) {
-				if(j<9) {
-					res +="\n" + (j+1) +"  " ;
-				}
-				else {
-					res +="\n" + (j+1) +" " ;
-				}
-				
-			} else {
-				res +="\n" ;
-			}
-		}
-		return res;
-	}
-	
-	public  String valueCell(Coordinates c) {
-		String res="";
-			if(opponentBoard.containsKey(c)) {
-				if(opponentBoard.get(c)==0) {
-					res+=" 0 ";
-				}
-				if(opponentBoard.get(c)==1) {
-					res+=" x ";
-				}
-				if(opponentBoard.get(c)==2) {
-					res+=" * ";
-				}
-			}
-			else{
-				res+=" ~ ";
-		}			
-		return res;	
 	}
 }

@@ -1,4 +1,4 @@
-package exception;
+package fr.igpolytech.guary.exceptions;
 
 public class OrientationException extends Exception {
 	

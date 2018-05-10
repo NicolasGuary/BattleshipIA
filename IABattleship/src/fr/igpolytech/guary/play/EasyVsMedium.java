@@ -1,5 +1,11 @@
-package bataille;
+package fr.igpolytech.guary.play;
 import java.util.Scanner;
+
+import fr.igpolytech.guary.battleship.Coordinates;
+import fr.igpolytech.guary.battleship.EasyAI;
+import fr.igpolytech.guary.battleship.Fleet;
+import fr.igpolytech.guary.battleship.Game;
+import fr.igpolytech.guary.battleship.MediumAI;
 
 public class EasyVsMedium {
 	private static int scoreP1 = 0;
@@ -13,10 +19,10 @@ public class EasyVsMedium {
 	}
 	
 	public static void play() {
-		AIPlayer p1 = new AIPlayer();
-		p1 = initAIPlayer("Beginner AI",p1);
+		EasyAI p1 = new EasyAI();
+		p1 = initAIPlayer(p1);
 		MediumAI p2 = new MediumAI();
-		p2 = initMediumAI("Medium AI", p2);
+		p2 = initMediumAI(p2);
 		
 		Game game = new Game(p1, p2);
 		while (!game.gameIsOver()){ 
@@ -42,16 +48,16 @@ public class EasyVsMedium {
 		System.out.println("Score " + p2.getName() +" : " +scoreP2 +"\n");	
 	}
 	
-	private static AIPlayer initAIPlayer(String name, AIPlayer p) {
-		System.out.println("Initialisation du joueur " + name);
+	private static EasyAI initAIPlayer(EasyAI p) {
+		System.out.println("Initialisation du joueur " + p.getName());
 		Fleet fleet = p.initFleet();
-		return new AIPlayer(name, fleet);
+		return new EasyAI(fleet);
 	}
 	
-	private static MediumAI initMediumAI(String name, MediumAI p) {
-		System.out.println("Initialisation du joueur " + name);
+	private static MediumAI initMediumAI(MediumAI p) {
+		System.out.println("Initialisation du joueur " + p.getName());
 		Fleet fleet = p.initFleet();
-		return new MediumAI(name, fleet);
+		return new MediumAI(fleet);
 	}
 	
 	
@@ -71,11 +77,5 @@ public class EasyVsMedium {
 			System.out.println("Déjà touché ce bateau à cet endroit !");
 			break;
 		}	
-	}
-	
-	public static void afficherEtatJoueur(Human p) {
-		System.out.println("Voici le plateau ennemi : \n" + 
-				p.OpponentBoardString() + "\n");
-				//+ p.fleetString()
 	}
 }

@@ -1,4 +1,4 @@
-package exception;
+package fr.igpolytech.guary.exceptions;
 
 public class CoordException extends Exception {
 	private static final long serialVersionUID = 1L;

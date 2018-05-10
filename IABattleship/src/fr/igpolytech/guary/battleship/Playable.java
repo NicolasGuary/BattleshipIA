@@ -1,10 +1,10 @@
-package bataille;
+package fr.igpolytech.guary.battleship;
 
 public interface Playable {
 	
 	// Methods that are common to both Human and AI Player
 	
-	//Ability to initialize a Fleet vith Ships
+	//Ability to initialize a Fleet with Ships
 	public Ship createShip(FleetType fleetType);
 	public Fleet initFleet();
 	
@@ -17,7 +17,4 @@ public interface Playable {
 	public String getName();
 	public Fleet getFleet();
 	
-	//Display method
-	//Not used for AI in order to speed the game process
-	public String OpponentBoardString();
 }

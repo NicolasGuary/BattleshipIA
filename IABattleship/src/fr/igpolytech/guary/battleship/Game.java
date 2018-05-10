@@ -1,4 +1,4 @@
-package bataille;
+package fr.igpolytech.guary.battleship;
 
 public class Game {
 	private int turn;
@@ -28,7 +28,7 @@ public class Game {
 			return j2;
 		}
 	}
-
+	
 public Playable getOpponent() {
 	if(playerTurn()==0) {
 		return j2;

@@ -1,4 +1,4 @@
-package bataille;
+package fr.igpolytech.guary.battleship;
 
 import java.util.ArrayList;
 
@@ -73,7 +73,10 @@ public class Coordinates {
 		}
 		return true;
 	}
-	
+	 public static boolean isOdd(Coordinates c) {
+		 int i = (int) c.getVert();
+		 return (c.getHor() % 2 == 0 && i%2 == 0 ) || (c.getHor() % 2 == 1 && i%2 ==1);
+	 }
 	public String computeCoordinates(Integer shipSize) {
 		String res="";
 		String a = this.right(shipSize).toString();

@@ -1,5 +1,10 @@
-package bataille;
+package fr.igpolytech.guary.play;
 import java.util.Scanner;
+
+import fr.igpolytech.guary.battleship.Coordinates;
+import fr.igpolytech.guary.battleship.Fleet;
+import fr.igpolytech.guary.battleship.Game;
+import fr.igpolytech.guary.battleship.Human;
 
 public class HumanVersusHuman {
 	private static int scoreP1 = 0;
@@ -20,7 +25,12 @@ public class HumanVersusHuman {
 		while (!game.gameIsOver()){ 
 			
 			System.out.println("C'est au tour de " + game.whosTurn().getName());
-			afficherEtatJoueur(game.whosTurn());
+			if(game.whosTurn() == p1) {
+			afficherEtatJoueur(p1);
+			}
+			else {
+				afficherEtatJoueur(p2);
+			}
 			Coordinates coordShot = game.whosTurn().attack();
 			int resShot = game.getOpponent().shot(coordShot);
 			System.out.println("L'adversaire tire en: " + coordShot.toString());
@@ -64,8 +74,8 @@ public class HumanVersusHuman {
 		}	
 	}
 	
-	public static void afficherEtatJoueur(Playable p) {
+	public static void afficherEtatJoueur(Human p) {
 		System.out.println("Voici le plateau ennemi : \n" + 
-				p.OpponentBoardString() + "\n");
+				p.opponentBoardString() + "\n");
 	}
 }

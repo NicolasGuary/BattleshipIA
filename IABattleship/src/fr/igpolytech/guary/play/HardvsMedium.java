@@ -1,7 +1,12 @@
-package bataille;
+package fr.igpolytech.guary.play;
 import java.util.Scanner;
 
-public class AiVersusAi {
+import fr.igpolytech.guary.battleship.Coordinates;
+import fr.igpolytech.guary.battleship.Fleet;
+import fr.igpolytech.guary.battleship.Game;
+import fr.igpolytech.guary.battleship.MediumAI;
+
+public class HardvsMedium {
 	private static int scoreP1 = 0;
 	private static int scoreP2 = 0;
 	static Scanner sc = new Scanner(System.in);;
@@ -12,16 +17,11 @@ public class AiVersusAi {
 		}
 	}
 	
-/*
-	private static Coordinates attack(AIPlayer p2) {
-		return p2.attack();
-	}
-*/
 	public static void play() {
-		AIPlayer p1 = new AIPlayer();
-		p1 = initAIPlayer("Player 1",p1);
-		AIPlayer p2 = new AIPlayer();
-		p2 = initAIPlayer("Player 2", p2);
+		HardAI p1 = new HardAI();
+		p1 = initHardAI(p1);
+		MediumAI p2 = new MediumAI();
+		p2 = initMediumAI(p2);
 		
 		Game game = new Game(p1, p2);
 		while (!game.gameIsOver()){ 
@@ -29,7 +29,7 @@ public class AiVersusAi {
 			System.out.println("C'est au tour de " + game.whosTurn().getName());
 				Coordinates coordShot = new Coordinates();
 				coordShot = game.whosTurn().attack();
-				System.out.println("L'adversaire tire en: " + coordShot.toString());
+				System.out.println(game.whosTurn().getName() +" tire en: " + coordShot.toString());
 				int resShot = game.getOpponent().shot(coordShot);
 				game.whosTurn().setResShot(coordShot, resShot);
 				promptShot(resShot);	
@@ -43,14 +43,20 @@ public class AiVersusAi {
 			scoreP2++;
 		}
 		System.out.println("Le joueur " + game.getWinner().getName() + " a gagné "+"au tour "+game.getTurn()+"\n");
-		System.out.println("Score Player1: "+scoreP1 +"\n");
-		System.out.println("Score Player2: "+scoreP2 +"\n");	
+		System.out.println("Score " + p1.getName() +" : " +scoreP1 +"\n");
+		System.out.println("Score " + p2.getName() +" : " +scoreP2 +"\n");	
 	}
 	
-	private static AIPlayer initAIPlayer(String name, AIPlayer p) {
-		System.out.println("Initialisation du joueur " + name);
+	private static HardAI initHardAI(HardAI p) {
+		System.out.println("Initialisation du joueur " + p.getName());
 		Fleet fleet = p.initFleet();
-		return new AIPlayer(name, fleet);
+		return new HardAI(fleet);
+	}
+	
+	private static MediumAI initMediumAI(MediumAI p) {
+		System.out.println("Initialisation du joueur " + p.getName());
+		Fleet fleet = p.initFleet();
+		return new MediumAI(fleet);
 	}
 	
 	
@@ -70,11 +76,5 @@ public class AiVersusAi {
 			System.out.println("Déjà touché ce bateau à cet endroit !");
 			break;
 		}	
-	}
-	
-	public static void afficherEtatJoueur(Human p) {
-		System.out.println("Voici le plateau ennemi : \n" + 
-				p.OpponentBoardString() + "\n");
-				//+ p.fleetString()
 	}
 }

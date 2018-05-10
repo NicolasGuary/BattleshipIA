@@ -1,5 +1,6 @@
-package bataille;
-import exception.*;
+package fr.igpolytech.guary.battleship;
+import fr.igpolytech.guary.exceptions.OverlapException;
+
 import java.util.ArrayList;
 
 public class Fleet {

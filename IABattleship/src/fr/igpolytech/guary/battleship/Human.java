@@ -1,9 +1,9 @@
-package bataille;
+package fr.igpolytech.guary.battleship;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-import exception.OverlapException;
+import fr.igpolytech.guary.exceptions.OverlapException;
 
 public class Human implements Playable {
 	public static final int BOARD_SIZE = 10;
@@ -107,7 +107,7 @@ public class Human implements Playable {
 	}
 	
 	//Methods used to display the board for Human players
-	public  String OpponentBoardString () {
+	public  String opponentBoardString () {
 		String res = "  ";
 		for(int j=0;j<Human.BOARD_SIZE+1;j++){
 			for(char i='A';i<'A'+Human.BOARD_SIZE;i++){
