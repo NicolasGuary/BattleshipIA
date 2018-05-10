@@ -50,7 +50,7 @@ public class Coordinates {
 		if (coord == null || coord.isEmpty() || coord.equalsIgnoreCase(null) || coord.length()<2) {
 			  return false;
 			}
-		// Vérification de la lettre
+		// Checking letter
 		if (!Character.isLetter(coord.charAt(0))) {
 			return false;
 		}
@@ -62,7 +62,7 @@ public class Coordinates {
 		if ((int)ligne > ((int)'A' + Human.BOARD_SIZE-1) || (int)ligne < ((int)'A')) {
 			return false;
 		}
-		// Vérification de la colonne
+		// Checking column
 		try {
 			int checkColonne = Integer.valueOf(coord.substring(1));
 			if (checkColonne < 1 || checkColonne > Human.BOARD_SIZE) {
@@ -132,7 +132,7 @@ public class Coordinates {
 		};
 		return res;
 	}
-	// Redéfinition de hasCode et de equals pour la comparaison automatique de containsKey
+	// Redefining equals and hashCode in order to compare two Coordinates
 	public boolean equals(Object o) {
 		Coordinates coord = (Coordinates)o;
 		return this.hor == coord.getHor() && this.vert == coord.getVert();

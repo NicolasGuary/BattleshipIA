@@ -6,7 +6,7 @@ import fr.igpolytech.guary.battleship.Fleet;
 import fr.igpolytech.guary.battleship.Game;
 import fr.igpolytech.guary.battleship.MediumAI;
 
-public class HardvsMedium {
+public class MediumVsHard {
 	private static int scoreP1 = 0;
 	private static int scoreP2 = 0;
 	static Scanner sc = new Scanner(System.in);;
