@@ -1,15 +1,9 @@
-package fr.igpolytech.guary.play;
+package guary.nicolas;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Stack;
 
-import fr.igpolytech.guary.battleship.Coordinates;
-import fr.igpolytech.guary.battleship.Fleet;
-import fr.igpolytech.guary.battleship.FleetType;
-import fr.igpolytech.guary.battleship.Human;
-import fr.igpolytech.guary.battleship.Playable;
-import fr.igpolytech.guary.battleship.Ship;
 import fr.igpolytech.guary.exceptions.OverlapException;
 
 public class HardAI implements Playable {
@@ -21,14 +15,12 @@ public class HardAI implements Playable {
 	private Stack<Coordinates> targets;
 	private Coordinates previousShot;
 	
-	public HardAI(Fleet fleet) {
-		this.fleet=fleet;
+	public HardAI() {
+		System.out.println("Initialisation du joueur " + this.getName());
+		this.fleet = initFleet();
 		this.targets = new Stack<Coordinates>();
 		this.previousShot = new Coordinates();
 		opponentBoard = new HashMap<Coordinates, Integer>();
-	}
-	public HardAI() {
-		super();
 	}
  
 	public String getName() {
@@ -107,17 +99,14 @@ public class HardAI implements Playable {
 		Coordinates coordinates = new Coordinates();
 		//First turn: Hunt Mode
 		if(previousShot.equals(new Coordinates())) {
-			System.out.println("Action 1");
 			coordinates = hunt();
 		}
 		//Hunting for a new Ship to take down
 		else if(targets.empty() && opponentBoard.get(previousShot)!=1) {
-			System.out.println("Action 2");
 			coordinates = hunt();
 		}
 		else { //if (!targets.empty())
 		//There is a Ship targeted to take down
-			System.out.println("Action 3");
 			if(opponentBoard.get(previousShot)==1) {
 				target(previousShot);
 			}
@@ -126,7 +115,6 @@ public class HardAI implements Playable {
 			}
 
 			else{
-				System.out.println("Action 4");
 				coordinates = hunt();
 			}
 		}

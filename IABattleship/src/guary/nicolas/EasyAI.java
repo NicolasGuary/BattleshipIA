@@ -1,26 +1,25 @@
-package fr.igpolytech.guary.battleship;
+package guary.nicolas;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 import fr.igpolytech.guary.exceptions.OverlapException;
 
-public class MediumAI implements Playable {
+public class EasyAI implements Playable {
 	public static final int BOARD_SIZE = 10;
 	/* Garde en memoire les tirs sur l'adversaire
 	code : A l'eau : 0 ; Touche : 1 ; Touché-Coulé : 2 */   
 	private HashMap<Coordinates, Integer> opponentBoard;
 	private Fleet fleet;
-	public MediumAI(Fleet fleet) {
-		this.fleet=fleet;
+	
+	public EasyAI() {
+		System.out.println("Initialisation du joueur " + this.getName());
+		this.fleet=initFleet();
 		opponentBoard = new HashMap<Coordinates, Integer>();
-	}
-	public MediumAI() {
-		super();
 	}
  
 	public String getName() {
-		return "MediumAI";
+		return "EasyAI";
 	}
 	public Fleet getFleet() {
 		return this.fleet;
@@ -89,27 +88,17 @@ public class MediumAI implements Playable {
 		return fleet;
 	}
 	
-	//Ability to attack at random Coordinates with memory
+	//Ability to attack at random Coordinates
 	
 	public Coordinates attack() {
 		//Generating random int 
 		Random rand = new Random();
-		int  n = rand.nextInt(10) + 1;
+		int  n = rand.nextInt(BOARD_SIZE) + 1;
 		//Generating random char
 	    Random r = new Random();
 	    int j = r.nextInt(BOARD_SIZE);
 		char k=(char)('A'+j);
 		Coordinates coordinates = new Coordinates(k,n);
-		
-		while(this.opponentBoard.containsKey(coordinates)) { 
-			//We won't pick a coordinate that as already been used
-			rand = new Random();
-			n = rand.nextInt(BOARD_SIZE) + 1;
-		    r = new Random();
-		    j = r.nextInt(BOARD_SIZE);
-			k=(char)('A'+j);
-			coordinates = new Coordinates(k,n);
-		}
 		return coordinates;
 	}
 	

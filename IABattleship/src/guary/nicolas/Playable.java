@@ -1,4 +1,4 @@
-package fr.igpolytech.guary.battleship;
+package guary.nicolas;
 
 public interface Playable {
 	

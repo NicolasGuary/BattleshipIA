@@ -1,4 +1,4 @@
-package fr.igpolytech.guary.battleship;
+package guary.nicolas;
 import fr.igpolytech.guary.exceptions.BadSizeException;
 import fr.igpolytech.guary.exceptions.OrientationException;
 

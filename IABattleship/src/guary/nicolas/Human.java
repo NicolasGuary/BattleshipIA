@@ -1,4 +1,4 @@
-package fr.igpolytech.guary.battleship;
+package guary.nicolas;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -14,8 +14,9 @@ public class Human implements Playable {
 	private String name;
 	
 	
-	public Human(String name, Fleet fleet) {
-		this.fleet = fleet;
+	public Human(String name) {
+		System.out.println("Initialisation du joueur " + name);
+		this.fleet = initFleet();
 		this.name = name;
 		opponentBoard = new HashMap<Coordinates, Integer>();
 	}
@@ -30,6 +31,9 @@ public class Human implements Playable {
 	public String getName() {
 		return name;
 	}
+	
+
+	
 	
 	//Method used to ask an Human player to input Coordinates
 	static Scanner sc = new Scanner(System.in);;
