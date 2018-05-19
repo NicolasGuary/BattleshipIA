@@ -1,5 +1,4 @@
 package guary.nicolas;
-
 import java.util.Scanner;
 
 public class Battleship {	

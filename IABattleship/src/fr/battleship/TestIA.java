@@ -11,7 +11,7 @@ import guary.nicolas.HardAI;
 import guary.nicolas.MediumAI;
 import guary.nicolas.Playable;
 
-public class TestAI {	
+public class TestIA {	
 	private static Playable p1 = null;
 	private static Playable p2 = null;
 	private static int rounds = 0;
