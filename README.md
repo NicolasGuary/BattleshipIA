@@ -15,14 +15,14 @@
 ### First Method: Use the provided .sh scripts
 
 If rights are not granted to execute the .sh scripts use: `chmod +x Battleship.sh` et `chmod +x TestAI.sh`
-Then you can launch the project using `./Battleship.sh` and/or `TestAI.sh` that you will both find at root of the project
+Then you can launch the project using `./Battleship.sh` and/or `./TestAI.sh` that you will both find at root of the project
 After execution, scripts will clean the project from the .class files.
 
 ### Second Method: Compile and Launch in Terminal
 
-From the root folder, execute the Unix command line: `javac src/guary/nicolas/*.java src/fr/battleship/*.java src/fr/igpolytech/guary/exceptions/*.java` in order to compile the whole project.
+From the IABattleship folder, that you can access with `cd IABattleship`, execute the Unix command line: `javac src/guary/nicolas/*.java src/fr/battleship/*.java src/fr/igpolytech/guary/exceptions/*.java` in order to compile the whole project.
 Now move to the src folder with `cd src`
-Pick up the program you wanna launch by doing eiter `guary.nicolas.Battleship` or `fr.battleship.testIA`
+Pick up the program you wanna launch by doing eiter `java guary.nicolas.Battleship` or `java fr.battleship.testIA`
 
 ###Third Method: Import the projet into Eclipse IDE.
 
