@@ -38,4 +38,4 @@ HardAI Strategy follows the following method:
 	- When the stack is empty, the AI goes back to hunt.
 
 
-###For more details, refer to the project report.
+### For more details, refer to the project report.
