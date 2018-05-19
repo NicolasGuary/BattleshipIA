@@ -24,7 +24,7 @@ From the IABattleship folder, that you can access with `cd IABattleship`, execut
 Now move to the src folder with `cd src`
 Pick up the program you wanna launch by doing eiter `java guary.nicolas.Battleship` or `java fr.battleship.testIA`
 
-###Third Method: Import the projet into Eclipse IDE.
+### Third Method: Import the projet into Eclipse IDE.
 
 
 ## Strategy
