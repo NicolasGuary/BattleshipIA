@@ -176,6 +176,22 @@ public class Ship {
 		return this.shipCase.get(missileCoord);
 	}
 	
+	public  String valueShip(Coordinates c) {
+		String res="";
+		for(Coordinates coord : this.shipCase.keySet()){
+			if(coord.equals(c)){
+				if(this.shipCase.get(coord)){
+					return " x ";
+				}else{
+					return " 0 ";
+				}
+			}else {
+				res =" ~ ";
+				}
+		}
+		return res;	
+	}
+	
 	@Override
 	public String toString() {
 		String s="[";

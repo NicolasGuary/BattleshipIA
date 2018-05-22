@@ -113,6 +113,7 @@ public class Human implements Playable {
 	//Methods used to display the board for Human players
 	public  String opponentBoardString () {
 		String res = "  ";
+		//Plateau 1
 		for(int j=0;j<Human.BOARD_SIZE+1;j++){
 			for(char i='A';i<'A'+Human.BOARD_SIZE;i++){
 				if (j == 0) {
@@ -120,6 +121,31 @@ public class Human implements Playable {
 				} else {
 					Coordinates c = new Coordinates(i,j);	
 					res+= valueCell(c);	
+				}
+			}
+			if (j != Human.BOARD_SIZE) {
+				if(j<9) {
+					res +="\n" + (j+1) +"  " ;
+				}
+				else {
+					res +="\n" + (j+1) +" " ;
+				}
+				
+			} else {
+				res +="\n" ;
+			}
+		}
+		res+="\n";
+		//Plateau 2
+		res +="Voici votre plateau: \n";
+		res +="  ";
+		for(int j=0;j<Human.BOARD_SIZE+1;j++){
+			for(char i='A';i<'A'+Human.BOARD_SIZE;i++){
+				if (j == 0) {
+					res += "  "+ i;
+				} else {
+					Coordinates c = new Coordinates(i,j);	
+					res+= valuePlayer(c);	
 				}
 			}
 			if (j != Human.BOARD_SIZE) {
@@ -155,6 +181,17 @@ public class Human implements Playable {
 		}			
 		return res;	
 	}
+	
+	public  String valuePlayer(Coordinates c) {
+		for(Ship ship : this.fleet.getShipList()){
+			String testValue = ship.valueShip(c);
+			if(!(testValue.equals(" ~ "))){
+				return testValue;
+			}
+		}
+		return " ~ ";
+	}
+		
 	
 	@Override
 	public String toString() {
